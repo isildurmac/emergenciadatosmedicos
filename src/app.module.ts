@@ -8,7 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'client/dist'),
+      rootPath: join(__dirname, '..', 'client/client/build'),
     }),
     TypeOrmModule.forRoot(),
   ],
