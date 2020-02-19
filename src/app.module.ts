@@ -10,7 +10,8 @@ import { RoleService } from './services/role.service';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './auth/jwt.strategy';
-
+import { UserRepository } from './repositories/user-repository';
+import { RoleRepository } from './repositories/role-repository';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { JwtStrategy } from './auth/jwt.strategy';
       rootPath: join(__dirname, '..', 'client/client/build'),
     }),
     TypeOrmModule.forRoot(),
+    TypeOrmModule.forFeature([UserRepository, RoleRepository]),
     PassportModule,
     JwtModule.register({
       secret: 'secretKey',
