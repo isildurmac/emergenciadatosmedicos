@@ -17,10 +17,10 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
+        <Route path="/">
           <Layout />
         </Route>
-        <Route replace={true} strict={true} path="/login">
+        <Route exact path="/login">
           <Login />
         </Route>
       </Switch>

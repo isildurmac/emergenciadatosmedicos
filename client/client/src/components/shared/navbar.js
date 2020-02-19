@@ -27,7 +27,7 @@ class Navbar extends React.Component {
                                             <Link className="nav-link" to = "/" > Inicio </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link className="nav-link" to = "Profile" > Perfil </Link>
+                                            <Link className="nav-link" to = "/profile" > Perfil </Link>
                                         </li>
                                         <li className="nav-item">
                                             <Link className="nav-link" to = "/search" > B&uacute;squeda </Link>

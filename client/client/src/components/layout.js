@@ -20,7 +20,7 @@ class Layout extends React.Component {
                 <Route exact path="/">
                   <Home />
                 </Route>
-                <Route exact path="/profile">
+                <Route path="/profile">
                   <Profile />
                 </Route>
               </Switch>
