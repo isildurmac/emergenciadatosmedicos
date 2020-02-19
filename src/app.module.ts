@@ -4,6 +4,13 @@ import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { RoleService } from './services/role.service';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './auth/jwt.strategy';
+
 
 @Module({
   imports: [
@@ -11,8 +18,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       rootPath: join(__dirname, '..', 'client/client/build'),
     }),
     TypeOrmModule.forRoot(),
+    PassportModule,
+    JwtModule.register({
+      secret: 'secretKey',
+      signOptions: {
+        expiresIn: '3600s',
+      },
+    }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [JwtStrategy, AppService, AuthService, UserService, RoleService],
 })
 export class AppModule {}
