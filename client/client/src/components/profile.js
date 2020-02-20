@@ -3,12 +3,16 @@ import {Panel} from 'primereact/panel';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
+import {helpers} from '../tools/helpers'
+import { from } from 'rxjs';
+import { async } from 'rxjs/internal/scheduler/async';
 
 class Profile extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            image:'',
             padecimientos:[
                 {id:1, padecimiento: 'Deficiencia Cardiovascular', doctor: 'paco el cojo'},
                 {id:2, padecimiento: 'Deficiencia Cardiovascular', doctor: 'paco el cojo'},
@@ -34,6 +38,14 @@ class Profile extends React.Component {
         };
     }
 
+    componentDidMount() {
+      helpers.generateQR('http://localhost:3000/qr')
+      .then(data => {
+              console.log("Data*******************: ", data);
+              this.setState({image: data});
+            });
+    }
+
     actionPad(rowData, column) {
         return (
           <div>
@@ -51,6 +63,20 @@ class Profile extends React.Component {
           </div>
         );
     }
+
+    // componentDidMount
+
+    generateQr = () => {
+      /* try {
+        
+      } catch (error) {
+        
+      } */
+      
+      /* const url = helpers.generateQR('http://localhost:3000/qr');
+      return url; */
+
+  }
 
     render() {
         return (
@@ -96,6 +122,10 @@ class Profile extends React.Component {
                       <label style={{ fontWeight: 'bolder' }}>Correo: </label>
                     </div>
                     <div className="col-lg-10">alexisperezglez@gmail.com</div>
+                    <div className="col-lg-2">
+                      <label style={{ fontWeight: 'bolder' }}>Qr: </label>
+                    </div>
+                    <img src= {this.state.image} alt="Red dot" />
                   </div>
                 </div>
               </div>
