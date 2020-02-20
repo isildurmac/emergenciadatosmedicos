@@ -2,10 +2,10 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 }
 from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -17,12 +17,13 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/">
-          <Layout />
-        </Route>
         <Route exact path="/login">
           <Login />
         </Route>
+        <Route path="/">
+          <Layout />
+        </Route>
+        <Redirect from="/**" to="/" />
       </Switch>
     </Router>
   );
