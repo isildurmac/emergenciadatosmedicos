@@ -8,17 +8,17 @@ export class User {
   @PrimaryGeneratedColumn()
   @IsNumber() @IsOptional() readonly id: number;
   @Column({ name: 'name', length: 191 })
-  @IsString() readonly name: string;
+  @IsString() name: string;
   @Column({ name: 'password', length: 191 })
-  @IsString() readonly password: string;
+  @IsString() password: string;
   @Column({ name: 'email', length: 191 })
-  @IsString() readonly email: string;
+  @IsString() email: string;
   @Column({ name: 'ci', length: 11 })
-  @IsString() readonly ci: string;
+  @IsString() ci: string;
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
-  @IsDate() readonly createdAt: Timestamp;
+  @IsDate() createdAt: Timestamp;
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
-  @IsDate() readonly updatedAt: Timestamp;
+  @IsDate() updatedAt: Timestamp;
 
   @ManyToOne(type => Role, role => role.users )
   role: Role;
