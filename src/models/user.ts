@@ -2,6 +2,8 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 import { IsString, IsNumber, IsOptional, IsDate } from 'class-validator';
 import { Role } from './role';
 import { hashSync } from 'bcrypt';
+import { Alergy } from './alergy';
+import { Contact } from './contact';
 
 @Entity('users')
 export class User {
@@ -22,6 +24,12 @@ export class User {
 
   @ManyToOne(type => Role, role => role.users )
   role: Role;
+
+  @ManyToOne(type => Alergy, alergy => role.users )
+  alergies: Alergy[];
+
+  @ManyToOne(type => Contact, role => role.users )
+  contacts: Contact[];
 
   @BeforeInsert()
   encryptPassword() {

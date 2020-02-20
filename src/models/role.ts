@@ -12,9 +12,6 @@ export class Role {
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
   updatedAt: Timestamp;
 
-  @OneToMany(
-    type => User,
-    user => user.role,
-  )
+  @OneToMany(type => User, user => user.role)
   users: User[];
 }
