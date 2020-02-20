@@ -5,6 +5,6 @@
     "username": "postgres",
     "password": "postgres",
     "database": "emergencia_medica_db",
-    "entities": ["dist/**/*.entity{.ts,.js}"],
+    "entities": ["dist/models/*{.ts,.js}"],
     "synchronize": true
 }
