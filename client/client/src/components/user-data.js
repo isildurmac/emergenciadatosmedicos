@@ -3,11 +3,9 @@ import {Panel} from 'primereact/panel';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import {helpers} from '../tools/helpers'
-import { from } from 'rxjs';
-import { async } from 'rxjs/internal/scheduler/async';
+import {helpers} from '../tools/helpers';
 
-class Profile extends React.Component {
+class UserData extends React.Component {
 
     constructor(props) {
         super(props);
@@ -229,4 +227,4 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile;
+export default UserData;
