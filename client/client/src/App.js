@@ -2,33 +2,30 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 }
 from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import LoginPage from './components/signIn/signIn';
 import Login from './components/login';
 import Layout from './components/layout';
 
 function App() {
-
   return (
-    <div className="App">
     <Router>
       <Switch>
-        <Route path="/" component={Layout}>
+        <Route exact path="/login">
+          <Login />
         </Route>
-        <Route exact path="/login" component={LoginPage}>
-          {/* <SignIn /> */}
+        <Route path="/">
+          <Layout />
         </Route>
+        <Redirect from="/**" to="/" />
       </Switch>
     </Router>
-     
-      </div>
   );
 }
 
