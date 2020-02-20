@@ -11,6 +11,11 @@ import Profile from './profile';
 import Registry from './registry/registry';
 
 class Layout extends React.Component {
+
+  constructor(props){
+    super(props);
+  }
+
     render() {
         return (
           <div>
