@@ -28,6 +28,9 @@ class Layout extends React.Component {
                 <Route path="/registry">
                   <Registry />
                 </Route>
+                <Route path="/user-data">
+                  <Registry />
+                </Route>
                 <Route exact path="/">
                   <Home />
                 </Route>
