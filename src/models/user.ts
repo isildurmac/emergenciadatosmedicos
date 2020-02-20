@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Timestamp, BeforeInsert, ManyToOne } from 'typeorm';
 import { Role } from './role';
+import { hashSync } from 'bcrypt';
 
 @Entity('users')
 export class User {
@@ -18,11 +19,12 @@ export class User {
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
   updatedAt: Timestamp;
 
-  @ManyToOne(type=> Role, role=>role.users )
+  @ManyToOne(type => Role, role => role.users )
   role: Role;
 
-  /* @BeforeInsert()
+  @BeforeInsert()
   encryptPassword() {
     this.password = hashSync(this.password);
-  } */
+  }
+
 }

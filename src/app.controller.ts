@@ -12,7 +12,7 @@ export class AppController {
     private readonly authService: AuthService,
   ) {}
 
-  @Get('*')
+  /* @Get()
   getHello(
     @Res() res: Response,
     @Next() next: NextFunction,
@@ -25,7 +25,7 @@ export class AppController {
     }
     // return this.appService.getHello();
     res.sendFile(join(__dirname, '..', 'client/client/build/index.html'));
-  }
+  } */
 
   // @UseGuards(AuthGuard('jwt'))
   @Post('api/auth/login')
