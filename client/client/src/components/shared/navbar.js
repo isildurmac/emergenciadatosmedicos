@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import LoginPage from '../signIn/signIn'
 
 class Navbar extends React.Component {
+
     render() {
         return (
             <header className="main_menu home_menu">
@@ -71,7 +73,7 @@ class Navbar extends React.Component {
                                             <a className="btn_1" href = "#" > Registrarse </a>
                                         </li>
                                         <li className="d-none d-lg-block" >
-                                            <NavLink className="btn_1" to = "/login"> Entrar </NavLink>
+                                            <Link className="btn_1" to = "/login" component={LoginPage} > Entrar </Link>
                                         </li>
                                     </ul>
                                 </div>

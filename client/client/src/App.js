@@ -10,21 +10,25 @@ import './App.css';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+import LoginPage from './components/signIn/signIn';
 import Login from './components/login';
 import Layout from './components/layout';
 
 function App() {
+
   return (
+    <div className="App">
     <Router>
       <Switch>
-        <Route path="/">
-          <Layout />
+        <Route path="/" component={Layout}>
         </Route>
-        <Route exact path="/login">
-          <Login />
+        <Route exact path="/login" component={LoginPage}>
+          {/* <SignIn /> */}
         </Route>
       </Switch>
     </Router>
+     
+      </div>
   );
 }
 

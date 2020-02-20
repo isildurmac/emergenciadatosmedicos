@@ -3,6 +3,8 @@ import {Panel} from 'primereact/panel';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
+import {helpers} from '../tools/helpers'
+import { from } from 'rxjs';
 
 class Profile extends React.Component {
 
@@ -52,6 +54,12 @@ class Profile extends React.Component {
         );
     }
 
+    generateQr = async () => {
+      const url = await helpers.generateQR('http://localhost:3000/qr');
+      return url;
+
+  }
+
     render() {
         return (
           <section className="section_padding">
@@ -96,6 +104,10 @@ class Profile extends React.Component {
                       <label style={{ fontWeight: 'bolder' }}>Correo: </label>
                     </div>
                     <div className="col-lg-10">alexisperezglez@gmail.com</div>
+                    <div className="col-lg-2">
+                      <label style={{ fontWeight: 'bolder' }}>Qr: </label>
+                    </div>
+                    <img src= {this.generateQr()} alt="Red dot" />
                   </div>
                 </div>
               </div>
