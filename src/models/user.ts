@@ -13,6 +13,12 @@ export class User {
   email: string;
   @Column({ name: 'ci', length: 11 })
   ci: string;
+  @Column({ name: 'userName', length: 50 })
+  userName: string;
+  @Column({ name: 'gender', length: 50 })
+  gender: string;
+  @Column({ name: 'address', length: 150 })
+  address: string;
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAt: Timestamp;
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
