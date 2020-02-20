@@ -13,7 +13,6 @@ import { JwtStrategy } from './auth/jwt.strategy';
 import { UserRepository } from './repositories/user-repository';
 import { RoleRepository } from './repositories/role-repository';
 import { ServeHtmlMiddleware } from './serve-html.middleware';
-import { UserController } from './user/user.controller';
 import { UserController } from './controllers/user.controller';
 
 @Module({
