@@ -10,4 +10,8 @@ export class UserRepository extends Repository<User> {
         return users;
 
     }
+
+  async findById(id: string) {
+    return await this.findOne(id);
+  }
 }
