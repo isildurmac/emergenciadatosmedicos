@@ -1,4 +1,13 @@
 import axios from 'axios';
-export class RegistryService{
-    
+ /*class RegistryService{
+    obtenerlistado = () =>{
+    return axios.get(`http://localhost:3000/user`)
+    ;}
 }
+export default RegistryService
+ }*/
+ export const RegistryService = {
+    obtenerlistado : () =>{
+        return axios.get(`http://localhost:3000/user`)
+        ;}
+ }

@@ -2,6 +2,11 @@ import React from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import {Dropdown} from 'primereact/dropdown';
+import { RegistryService } from '../../services/RegistryService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+//import RegistryService from '../../services/RegistryService'
+
 
 const sexoSelectItems = [
   {label: 'Masculino', value: 'M'},
@@ -12,27 +17,19 @@ class Registry extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      users: []
+    };
   }
 
-  actionPad(rowData, column) {
-    return (
-      <div>
-        <Button
-          type="button"
-          icon="pi pi-search"
-          className="p-button-success"
-          style={{ marginRight: '.5em' }}
-        ></Button>
-        <Button
-          type="button"
-          icon="pi pi-pencil"
-          className="p-button-warning"
-        ></Button>
-      </div>
-    );
-  }
   
+  componentDidMount() {
+    RegistryService.obtenerlistado().then(res => {
+      const users = res.data;
+      console.log(users);
+      this.setState({ users });
+    })
+  }
   render() {
     return (
       
@@ -75,6 +72,30 @@ class Registry extends React.Component {
             <br />
             <Button label="Aceptar" />
           </form>
+         <br/>
+         <DataTable value={this.state.users}>
+                  <Column field="name" header="Nombre" style={{ width: 'auto' }} />
+                  <Column
+                    field="email"
+                    header="Email"
+                    style={{ width: 'auto' }}
+                  />
+                 <Column
+                    field="ci"
+                    header="CI"
+                    style={{ width: 'auto' }}
+                  />
+                  <Column
+                    field="address"
+                    header="Dirección"
+                    style={{ width: 'auto' }}
+                  />
+                  <Column
+                    field="gender"
+                    header="Sexo"
+                    style={{ width: '10%' }}
+                  />
+                </DataTable>
         </div>
       </section>
 
