@@ -11,5 +11,12 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   // await app.listen(process.env.PORT);
+
+  // You can disable detailed validation error messages by
+  /*app.useGlobalPipes(
+    new ValidationPipe({
+      disableErrorMessages: true,
+    }),
+  );*/
 }
 bootstrap();
