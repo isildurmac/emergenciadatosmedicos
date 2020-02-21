@@ -17,7 +17,11 @@ export class UserService {
     return this.userRepository.findOneOrFail({ where: { email } });
   }
 
-   /*async saveOrEditUser(user: CreateEditUser) {
+  async findOneById(id: string) {
+    return this.userRepository.findOne(id);
+  }
+
+  /* async saveOrEditUser(user: CreateEditUser) {
     if (user.id) {
       if (user.password === '') {
         const { name, email, type } = user;

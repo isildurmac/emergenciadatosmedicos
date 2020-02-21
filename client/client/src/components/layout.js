@@ -5,11 +5,11 @@ import Home from './home';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Redirect
+    Route
 } from 'react-router-dom';
 import Profile from './profile';
 import Registry from './registry/registry';
+import UserData from './user-data';
 
 class Layout extends React.Component {
 
@@ -21,19 +21,22 @@ class Layout extends React.Component {
         return (
           <div>
             <Navbar />
-            <Router>
+            <div>
               <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
                 <Route path="/profile">
                   <Profile />
                 </Route>
                 <Route path="/registry">
                   <Registry />
                 </Route>
+                <Route path="/user-data">
+                  <UserData />
+                </Route>
+                <Route exact path="/">
+                  <Home />
+                </Route>
               </Switch>
-            </Router>
+            </div>
             <Footer />
           </div>
         );

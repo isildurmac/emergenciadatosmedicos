@@ -72,23 +72,3 @@ class App extends Component {
   }
 }
 export default App;
-
-
-{/* function App() {
-
-  return (
-    <div className="App">
-    <Router>
-      <Switch>
-        <Route path="/" component={Layout}>
-        </Route>
-        <Route exact path="/login" component={Login}>
-        </Route>
-      </Switch>
-    </Router>
-     
-      </div>
-  );
-}
-
-export default App; */}
