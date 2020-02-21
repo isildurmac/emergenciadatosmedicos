@@ -68,7 +68,7 @@ class Navbar extends React.Component {
                                         </li>
 
                                         <li className="nav-item" >
-                                            <a className="nav-link" href = "contact.html" > Contact </a>
+                                            <Link className="nav-link" to = "/contact" > Contacto </Link>
                                         </li>
                                         <li className="d-none d-lg-block" >
                                             <a className="btn_1" href = "#" > Registrarse </a>

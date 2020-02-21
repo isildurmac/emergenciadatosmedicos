@@ -10,6 +10,7 @@ import {
 import Profile from './profile';
 import Registry from './registry/registry';
 import UserData from './user-data';
+import Contact from './contact/contact';
 
 class Layout extends React.Component {
 
@@ -34,6 +35,9 @@ class Layout extends React.Component {
                 </Route>
                 <Route exact path="/">
                   <Home />
+                </Route>
+                <Route exact path="/contact">
+                  <Contact />
                 </Route>
               </Switch>
             </div>
