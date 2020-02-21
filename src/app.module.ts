@@ -14,6 +14,7 @@ import { UserRepository } from './repositories/user-repository';
 import { RoleRepository } from './repositories/role-repository';
 import { ServeHtmlMiddleware } from './serve-html.middleware';
 import { UserControllerController } from './controllers/user-controller/user-controller.controller';
+import { UserController} from './controllers/user.controller';
 
 @Module({
   imports: [
@@ -30,7 +31,7 @@ import { UserControllerController } from './controllers/user-controller/user-con
       },
     }),
   ],
-  controllers: [AppController, UserControllerController],
+  controllers: [AppController, UserControllerController,UserController],
   providers: [JwtStrategy, AppService, AuthService, UserService, RoleService],
 })
 export class AppModule {

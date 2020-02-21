@@ -1,6 +1,6 @@
 import axios from 'axios';
 export default class RegistryService {
-    obtenerResultado = () => {
-        return "caca";
+    obtenerResultado = async () => {
+        return axios.get('http://localhost:3000/user');
     }
 }

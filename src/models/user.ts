@@ -9,6 +9,12 @@ export class User {
   @IsNumber() @IsOptional() readonly id: number;
   @Column({ name: 'name', length: 191 })
   @IsString() name: string;
+  @Column({ name: 'userName', length: 50 })
+  @IsString() userName: string;
+  @Column({ name: 'gender', length: 50 })
+  @IsString() gender: string;
+  @Column({ name: 'address', length: 150 })
+  @IsString() address: string;
   @Column({ name: 'password', length: 191 })
   @IsString() password: string;
   @Column({ name: 'email', length: 191 })

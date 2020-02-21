@@ -9,11 +9,11 @@ export class UserControllerController {
     private readonly appService: AppService,
     private readonly userService: UserService,
   ) {}
-
+/*
   @Get('api/user/data/:id')
   async getUserData(@Param('id') id: any): Promise<User> {
     console.log('USER ID: ', id);
     return this.userService.findOneById(id);
   }
-
+*/
 }

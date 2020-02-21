@@ -2,10 +2,9 @@ import React from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import {Dropdown} from 'primereact/dropdown';
-import { RegistryService } from '../../services/RegistryService';
+import  RegistryService  from '../../services/RegistryService';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-//import RegistryService from '../../services/RegistryService'
 
 
 const sexoSelectItems = [
@@ -20,11 +19,13 @@ class Registry extends React.Component {
     this.state = {
       users: []
     };
+
+    this.registryService = new RegistryService();
   }
 
   
   componentDidMount() {
-    RegistryService.obtenerlistado().then(res => {
+    this.registryService.obtenerResultado().then(res => {
       const users = res.data;
       console.log(users);
       this.setState({ users });
