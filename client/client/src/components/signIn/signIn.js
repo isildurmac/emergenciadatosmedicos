@@ -95,24 +95,24 @@ const LoginForm = (props) => {
               <tr>
                  <div className="p-col-12">
                    <td><label>Usuario:</label></td>
-                   <td><InputText value={user} onChange={this.userChange} /></td>
+                   <td><InputText value={user} /></td>
                  </div>
               </tr>
               <tr>
                  <div className="p-col-12">
                    <td><label>Contraseña:</label></td>
-                   <td><Password value={password} onChange={this.passwordChange} /></td>
+                   <td><Password value={password} /></td>
                  </div>
               </tr>
               <tr>
                 <div className="p-col-12">
-                    <td><Checkbox inputId="cb1" value={remember} onChange={this.rememberChecked} ></Checkbox>
+                    <td><Checkbox inputId="cb1" value={remember} ></Checkbox>
                     <label htmlFor="cb1" className="p-checkbox-label">Recordarme</label></td>
                 </div>
               </tr>
               <tr>
                 <div className="p-col-12">
-                  <td><Button label="Entrar" onClick={this.handleClick} /></td>
+                  <td><Button label="Entrar" /></td>
                 </div>
               </tr>
           </table>
