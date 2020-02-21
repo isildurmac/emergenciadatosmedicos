@@ -10,8 +10,7 @@ import './App.css';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import LoginPage from './components/signIn/signIn';
-import Login from './components/login';
+import Login from './components/autenticacion/login'
 import Layout from './components/layout';
 
 function App() {
@@ -22,8 +21,7 @@ function App() {
       <Switch>
         <Route path="/" component={Layout}>
         </Route>
-        <Route exact path="/login" component={LoginPage}>
-          {/* <SignIn /> */}
+        <Route exact path="/login" component={Login}>
         </Route>
       </Switch>
     </Router>
