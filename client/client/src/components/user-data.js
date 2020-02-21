@@ -3,46 +3,34 @@ import {Panel} from 'primereact/panel';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import {helpers} from '../tools/helpers'
-import { from } from 'rxjs';
-import { async } from 'rxjs/internal/scheduler/async';
-import RegistryService from '../services/RegistryService';
+import {helpers} from '../tools/helpers';
 
-class Profile extends React.Component {
+class UserData extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             image:'',
             padecimientos:[
-                {id:1, padecimiento: 'Deficiencia Cardiovascular', doctor: 'paco el cojo'},
-                {id:2, padecimiento: 'Deficiencia Cardiovascular', doctor: 'paco el cojo'},
-                {id:3, padecimiento: 'Deficiencia Cardiovascular', doctor: 'paco el cojo'},
-                {id:4, padecimiento: 'Deficiencia Cardiovascular', doctor: 'paco el cojo'},
-                {id:5, padecimiento: 'Deficiencia Cardiovascular', doctor: 'paco el cojo'}
+                {id:1, padecimiento: 'Hipotiroidismo', doctor: 'Alexis Valdes'},
+                {id:2, padecimiento: 'Diabetes Melitus', doctor: 'Alexis Valdes'},
+                {id:3, padecimiento: 'Hipertension Arterial', doctor: 'Alexis Valdes'}
             ],
             alergias:[
                 {id:1, alergia: 'Mariscos'},
-                {id:2, alergia: 'Mariscos'},
-                {id:3, alergia: 'Mariscos'},
-                {id:4, alergia: 'Mariscos'},
-                {id:5, alergia: 'Mariscos'}
+                {id:2, alergia: 'Penicilina'},
+                {id:3, alergia: 'Polvo'},
+                {id:4, alergia: 'Cambio de tiempo'}
             ],
             contactos:[
-                {id:1, nombre: 'juana de arco', telefono: '234234234234', relacion: 'familiar'},
-                {id:2, nombre: 'juana de arco', telefono: '234234234234', relacion: 'familiar'},
-                {id:3, nombre: 'juana de arco', telefono: '234234234234', relacion: 'familiar'},
-                {id:4, nombre: 'juana de arco', telefono: '234234234234', relacion: 'familiar'},
-                {id:5, nombre: 'juana de arco', telefono: '234234234234', relacion: 'familiar'},
-                {id:6, nombre: 'juana de arco', telefono: '234234234234', relacion: 'familiar'}
+                {id:1, nombre: 'Marta Perez', telefono: '54234234', relacion: 'Mama'},
+                {id:2, nombre: 'Daniel de Arcos', telefono: '54234235', relacion: 'Papa'},
+                {id:3, nombre: 'Alejandro Rodriguez', telefono: '54234236', relacion: 'Hermano'}
             ]
         };
-
-        this.registryService = new RegistryService();
     }
 
     componentDidMount() {
-      console.log("servicio: ", this.registryService.obtenerResultado());
       helpers.generateQR('http://localhost:3000/qr')
       .then(data => {
               console.log("Data*******************: ", data);
@@ -67,20 +55,6 @@ class Profile extends React.Component {
           </div>
         );
     }
-
-    // componentDidMount
-
-    generateQr = () => {
-      /* try {
-
-      } catch (error) {
-
-      } */
-
-      /* const url = helpers.generateQR('http://localhost:3000/qr');
-      return url; */
-
-  }
 
     render() {
         return (
@@ -111,7 +85,7 @@ class Profile extends React.Component {
                     <div className="col-lg-2">
                       <label style={{ fontWeight: 'bolder' }}>Nombre: </label>
                     </div>
-                    <div className="col-lg-10">Alexis Perez Gonzalez</div>
+                    <div className="col-lg-10">Alexis de Arcos Perez</div>
                     <div className="col-lg-2">
                       <label style={{ fontWeight: 'bolder' }}>CI: </label>
                     </div>
@@ -125,7 +99,7 @@ class Profile extends React.Component {
                     <div className="col-lg-2">
                       <label style={{ fontWeight: 'bolder' }}>Correo: </label>
                     </div>
-                    <div className="col-lg-10">alexisperezglez@gmail.com</div>
+                    <div className="col-lg-10">alexdarcosperez@gmail.com</div>
                     <div className="col-lg-2">
                       <label style={{ fontWeight: 'bolder' }}>Qr: </label>
                     </div>
@@ -253,4 +227,4 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile;
+export default UserData;

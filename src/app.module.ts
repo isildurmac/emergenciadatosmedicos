@@ -13,7 +13,7 @@ import { JwtStrategy } from './auth/jwt.strategy';
 import { UserRepository } from './repositories/user-repository';
 import { RoleRepository } from './repositories/role-repository';
 import { ServeHtmlMiddleware } from './serve-html.middleware';
-import { UserController } from './controllers/user.controller';
+import { UserControllerController } from './controllers/user-controller/user-controller.controller';
 
 @Module({
   imports: [
@@ -30,7 +30,7 @@ import { UserController } from './controllers/user.controller';
       },
     }),
   ],
-  controllers: [AppController, UserController],
+  controllers: [AppController, UserControllerController],
   providers: [JwtStrategy, AppService, AuthService, UserService, RoleService],
 })
 export class AppModule {
