@@ -43,7 +43,7 @@ class Profile extends React.Component {
 
     componentDidMount() {
       console.log("servicio: ", this.registryService.obtenerResultado());
-      helpers.generateQR('http://localhost:3000/profile/id');
+      helpers.generateQR('http://localhost:3000/profile/id')
       .then(data => {
               console.log("Data*******************: ", data);
               this.setState({image: data});
