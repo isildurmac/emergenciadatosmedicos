@@ -1,5 +1,5 @@
 
-import { Injectable } from '@nestjs/common';
+/*import { Injectable } from '@nestjs/common';
 
 export type User = any;
 
@@ -30,7 +30,7 @@ export class UsersService {
   async findOne(username: string): Promise<User | undefined> {
     return this.users.find(user => user.username === username);
   }
-}
+}*/
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -51,7 +51,7 @@ export class UserService {
     return this.userRepository.findOneOrFail({ where: { email } });
   }
 
-  /* async saveOrEditUser(user: CreateEditUser) {
+   /*async saveOrEditUser(user: CreateEditUser) {
     if (user.id) {
       if (user.password === '') {
         const { name, email, type } = user;
@@ -62,5 +62,6 @@ export class UserService {
       }
     }
     return this.usersRepository.save(user);
-  } */
+  }*/ 
 }
+

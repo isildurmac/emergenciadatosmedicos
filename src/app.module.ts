@@ -13,8 +13,6 @@ import { JwtStrategy } from './auth/jwt.strategy';
 import { UserRepository } from './repositories/user-repository';
 import { RoleRepository } from './repositories/role-repository';
 import { ServeHtmlMiddleware } from './serve-html.middleware';
-import { AuthenticationModule } from './authentication/authentication.module';
-import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -30,8 +28,6 @@ import { UsersModule } from './users/users.module';
         expiresIn: '3600s',
       },
     }),
-    AuthenticationModule,
-    UsersModule,
   ],
   controllers: [AppController],
   providers: [JwtStrategy, AppService, AuthService, UserService, RoleService],

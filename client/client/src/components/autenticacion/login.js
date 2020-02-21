@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { iniciarSesionUsuario } from "../../acciones/accionesAutenticacion";
 
-import "../../estilos/Auth.scss";
-
 class Login extends Component{
    constructor(){
        super();
@@ -64,7 +62,7 @@ class Login extends Component{
     
         return (
           <div className="base-wrapper">
-            <div className="auth-header">Registrarse</div>
+            <div className="auth-header">Inciar Sesión</div>
             <form className="auth-form" noValidate onSubmit={this.onSubmit}>
               <div className="auth-group">
                 <label>
