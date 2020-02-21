@@ -1,4 +1,6 @@
 import jwt_decode from "jwt-decode";
+import axios from 'axios';
+import setAuthToken from '../components/autenticacion/setAuthentication';
 
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./tiposAcciones";
 
