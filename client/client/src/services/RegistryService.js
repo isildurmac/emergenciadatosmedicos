@@ -1,4 +1,6 @@
 import axios from 'axios';
-export class RegistryService{
-    
+export default class RegistryService {
+    obtenerResultado = () => {
+        return "caca";
+    }
 }

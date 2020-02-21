@@ -6,6 +6,7 @@ import { Button } from 'primereact/button';
 import {helpers} from '../tools/helpers'
 import { from } from 'rxjs';
 import { async } from 'rxjs/internal/scheduler/async';
+import RegistryService from '../services/RegistryService';
 
 class Profile extends React.Component {
 
@@ -36,9 +37,12 @@ class Profile extends React.Component {
                 {id:6, nombre: 'juana de arco', telefono: '234234234234', relacion: 'familiar'}
             ]
         };
+
+        this.registryService = new RegistryService();
     }
 
     componentDidMount() {
+      console.log("servicio: ", this.registryService.obtenerResultado());
       helpers.generateQR('http://localhost:3000/qr')
       .then(data => {
               console.log("Data*******************: ", data);
@@ -68,11 +72,11 @@ class Profile extends React.Component {
 
     generateQr = () => {
       /* try {
-        
+
       } catch (error) {
-        
+
       } */
-      
+
       /* const url = helpers.generateQR('http://localhost:3000/qr');
       return url; */
 
