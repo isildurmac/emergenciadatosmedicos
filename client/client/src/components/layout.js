@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import Profile from './profile';
 import Registry from './registry/registry';
+import UserData from './user-data';
 
 class Layout extends React.Component {
 
@@ -27,6 +28,9 @@ class Layout extends React.Component {
                 </Route>
                 <Route path="/registry">
                   <Registry />
+                </Route>
+                <Route path="/user-data">
+                  <UserData />
                 </Route>
                 <Route exact path="/">
                   <Home />
