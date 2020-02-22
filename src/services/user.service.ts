@@ -1,6 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserDTO } from '../models/user.dto'
+import { LoginDTO } from '../models/auth.dto'
 import { UserRepository } from 'src/repositories/user-repository';
+import bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -19,6 +22,21 @@ export class UserService {
 
   async findOneById(id: string) {
     return this.userRepository.findOne(id);
+  }
+
+  async findOneByLogin(login: LoginDTO) {
+    const user = await this.userRepository.findOne(login.email);
+    if(!user) {
+      throw new UnauthorizedException("Credenciales inválidas");
+    }
+    
+    if(await bcrypt.compare(login.password, user.password))
+    {
+      return user;
+    }
+    else {
+      throw new UnauthorizedException("Credenciales inválidas");
+    }
   }
 
   /* async saveOrEditUser(user: CreateEditUser) {

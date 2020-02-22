@@ -28,6 +28,13 @@ export class AppController {
   } */
 
   // @UseGuards(AuthGuard('jwt'))
+
+  @UseGuards(AuthGuard)
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
+  }
+  
   @Post('api/auth/login')
   async login(@Body() user: any) {
     console.log('USER: ', user);
