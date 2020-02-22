@@ -33,4 +33,9 @@ export class AppController {
     console.log('USER: ', user);
     return this.authService.login(user);
   }
+
+  @Post('api/contact')
+  async contact(@Body() message: any) {
+    return {result: message.email};
+  }
 }
