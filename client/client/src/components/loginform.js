@@ -5,15 +5,21 @@ import { Button } from 'primereact/button';
 import { Checkbox } from 'primereact/checkbox';
 
 class Loginform extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { checked: false, email: '', password: '' };
-
-    this.onChangeChecked = this.onChangeChecked.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.onLogin = this.onLogin.bind(this);
+  constructor(){
+    super();
+    this.state = {
+        email: "",
+        password: "",
+        errors: {}
+    }
   }
+
+  componentDidMount(){
+    //Si inició sesión y el usuario navega a la página de inicio de sesión, se redirige al dashboard
+    if (this.props.autenticacion == true) {
+     this.props.history.push("/dashboard");
+   }
+}
 
   onChangeChecked(e) {
     if (e.checked) this.setState({ checked: true });

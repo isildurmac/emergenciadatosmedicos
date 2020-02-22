@@ -5,13 +5,13 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import { NextFunction, Response, Request as RequestExp } from 'express';
 
-@Controller()
+@Controller('api')
 export class AppController {
   constructor(
     private readonly appService: AppService,
     private readonly authService: AuthService,
   ) {}
-
+  
   /* @Get()
   getHello(
     @Res() res: Response,
@@ -28,13 +28,20 @@ export class AppController {
   } */
 
   // @UseGuards(AuthGuard('jwt'))
-  @Post('api/auth/login')
+
+  @UseGuards(AuthGuard)
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
+  }
+  
+  @Post('/auth/login')
   async login(@Body() user: any) {
     console.log('USER: ', user);
     return this.authService.login(user);
   }
 
-  @Post('api/contact')
+  @Post('/contact')
   async contact(@Body() message: any) {
     return {result: message.email};
   }
