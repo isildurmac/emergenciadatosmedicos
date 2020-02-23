@@ -1,7 +1,7 @@
 import { Controller, Get, Res, UseGuards, Post, Next, Req, Request, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { join } from 'path';
-import { AuthService } from './services/auth.service';
+// import { AuthService } from './services/auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import { NextFunction, Response, Request as RequestExp } from 'express';
 
@@ -9,7 +9,7 @@ import { NextFunction, Response, Request as RequestExp } from 'express';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly authService: AuthService,
+    // private readonly authService: AuthService,
   ) {}
   
   /* @Get()
@@ -35,11 +35,11 @@ export class AppController {
     return req.user;
   }
   
-  @Post('/auth/login')
-  async login(@Body() user: any) {
-    console.log('USER: ', user);
-    return this.authService.login(user);
-  }
+  // @Post('/auth/login')
+  // async login(@Body() user: any) {
+  //   console.log('USER: ', user);
+  //   return this.authService.login(user);
+  // }
 
   @Post('/contact')
   async contact(@Body() message: any) {
