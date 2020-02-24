@@ -5,7 +5,7 @@ import { Dropdown } from 'primereact/dropdown';
 import RegistryService from '../../services/RegistryService';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-
+import { Validator } from "validator";
 
 const sexoSelectItems = [
   { label: 'Masculino', value: 'M' },
@@ -26,9 +26,11 @@ class Registry extends React.Component {
       password:'', 
       contrasena1:'',
       address:'',
-      gender:'' }
+      gender:'' },
+    
     };
     this.registryService = new RegistryService();
+    
   }
 onChange = e => 
     this.setState({
@@ -43,15 +45,22 @@ onChange = e =>
   }
 
   onSubmit=()=>{
+    const errors=this.validate(this.state.data);
+    this.setState({errors});
+    console.log('*********************************************************************');
+    console.log(this.state.data);
     this.registryService.saveUser(this.state.data).then(res=>{
       console.log (res);
       this.preventDefault();
     })
   }
+ 
+  }
   render() {
     return (
       <section className="section_padding">
         <div className="container">
+       
           <form onSubmit={this.onSubmit}>
             <span className="p-float-label">
               <InputText id="nombre" name='name' value={this.state.data.name} onChange={this.onChange}/>
