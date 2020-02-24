@@ -31,7 +31,7 @@ export class User {
 
   @BeforeInsert()
   encryptPassword() {
-    this.password = hashSync(this.password);
+    this.password = hashSync(this.password,10);
   }
 
 }
