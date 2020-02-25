@@ -9,6 +9,8 @@ import {
 } from 'react-router-dom';
 import Profile from './profile';
 import Registry from './registry/registry';
+import UserData from './user-data';
+import Contact from './contact/contact';
 
 class Layout extends React.Component {
 
@@ -28,8 +30,14 @@ class Layout extends React.Component {
                 <Route path="/registry">
                   <Registry />
                 </Route>
+                <Route path="/user-data">
+                  <UserData />
+                </Route>
                 <Route exact path="/">
                   <Home />
+                </Route>
+                <Route exact path="/contact">
+                  <Contact />
                 </Route>
               </Switch>
             </div>

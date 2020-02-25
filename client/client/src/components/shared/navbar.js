@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import LoginPage from '../signIn/signIn'
+import Login from '../autenticacion/login'
 
 class Navbar extends React.Component {
 
@@ -46,8 +46,9 @@ class Navbar extends React.Component {
                                                 Pages
                                             </a>
                                             <div className="dropdown-menu" aria-labelledby = "navbarDropdown" >
-                                                <a className="dropdown-item" href = "services.html" > services </a>
-                                                <a className="dropdown-item" href = "elements.html" > Elements </a>
+                                                <Link className="dropdown-item" to = "/user-data" > User Data </Link>
+                                                <Link className="dropdown-item" href = "services.html" > Services </Link>
+                                                <Link className="dropdown-item" href = "elements.html" > Elements </Link>
                                             </div>
                                         </li>
                                         <li className="nav-item dropdown" >
@@ -61,19 +62,19 @@ class Navbar extends React.Component {
                                                 blog
                                             </a>
                                             <div className="dropdown-menu" aria-labelledby = "navbarDropdown_1" >
-                                                <a className="dropdown-item" href = "blog.html" > blog </a>
-                                                <a className="dropdown-item" href = "single-blog.html" > Single blog </a>
+                                                <Link className="dropdown-item" href = "blog.html" > blog </Link>
+                                                <Link className="dropdown-item" href = "single-blog.html" > Single blog </Link>
                                             </div>
                                         </li>
 
                                         <li className="nav-item" >
-                                            <a className="nav-link" href = "contact.html" > Contact </a>
+                                            <Link className="nav-link" to = "/contact" > Contacto </Link>
                                         </li>
                                         <li className="d-none d-lg-block" >
                                             <a className="btn_1" href = "#" > Registrarse </a>
                                         </li>
                                         <li className="d-none d-lg-block" >
-                                            <Link className="btn_1" to = "/login" > Entrar </Link>
+                                            <NavLink className="btn_1" to = "/login"> Entrar </NavLink>
                                         </li>
                                     </ul>
                                 </div>

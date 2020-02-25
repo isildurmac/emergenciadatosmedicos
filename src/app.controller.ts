@@ -1,7 +1,7 @@
 import { Controller, Get, Res, UseGuards, Post, Next, Req, Request, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { join } from 'path';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './auth/auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import { NextFunction, Response, Request as RequestExp } from 'express';
 
@@ -28,9 +28,14 @@ export class AppController {
   } */
 
   // @UseGuards(AuthGuard('jwt'))
-  // @Post('api/auth/login')
-  // async login(@Body() user: any) {
-  //   console.log('USER: ', user);
-  //   return this.authService.login(user);
-  // }
+  @Post('api/auth/login')
+  async login(@Body() user: any) {
+    console.log('USER: ', user);
+    return this.authService.signIn(user);
+  }
+
+  @Post('api/contact')
+  async contact(@Body() message: any) {
+    return {result: message.email};
+  }
 }
