@@ -23,8 +23,8 @@ import { AuthRepository } from './auth/auth.repository';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client/client/build'),
     }),
-    //TypeOrmModule.forRoot(),
-    TypeOrmModule.forRootAsync({
+    TypeOrmModule.forRoot(),
+    /* TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'postgres',
         host: 'localhost',
@@ -34,7 +34,7 @@ import { AuthRepository } from './auth/auth.repository';
         database: 'emergencia_medica_db',
         entities: ['dist/models/*{.ts,.js}'],
       }),
-    }),
+    }), */
     TypeOrmModule.forFeature([UserRepository, RoleRepository, AuthRepository]),
     PassportModule,
     JwtModule.register({
