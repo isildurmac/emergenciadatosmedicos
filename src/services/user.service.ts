@@ -1,40 +1,9 @@
-
-/*import { Injectable } from '@nestjs/common';
-
-export type User = any;
-
-@Injectable()
-export class UsersService {
-  private readonly users: User[];
-
-  constructor() {
-    this.users = [
-      {
-        userId: 1,
-        username: 'john',
-        password: 'changeme',
-      },
-      {
-        userId: 2,
-        username: 'chris',
-        password: 'secret',
-      },
-      {
-        userId: 3,
-        username: 'maria',
-        password: 'guess',
-      },
-    ];
-  }
-
-  async findOne(username: string): Promise<User | undefined> {
-    return this.users.find(user => user.username === username);
-  }
-}*/
-
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserDTO } from '../models/user.dto'
+import { LoginDTO } from '../models/auth.dto'
 import { UserRepository } from 'src/repositories/user-repository';
+import bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -52,7 +21,22 @@ export class UserService {
   }
 
   async findOneById(id: string) {
-    return this.userRepository.findById(id);
+    return this.userRepository.findOne(id);
+  }
+
+  async findOneByLogin(login: LoginDTO) {
+    const user = await this.userRepository.findOne(login.email);
+    if(!user) {
+      throw new UnauthorizedException("Credenciales inválidas");
+    }
+    
+    if(await bcrypt.compare(login.password, user.password))
+    {
+      return user;
+    }
+    else {
+      throw new UnauthorizedException("Credenciales inválidas");
+    }
   }
 
   /* async saveOrEditUser(user: CreateEditUser) {
@@ -68,4 +52,3 @@ export class UserService {
     return this.usersRepository.save(user);
   }*/ 
 }
-

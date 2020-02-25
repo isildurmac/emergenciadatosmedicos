@@ -6,12 +6,6 @@ export class UserRepository extends Repository<User> {
     async findAll() {
         const users: User[] = await this.createQueryBuilder('user')
             .getMany();
-
         return users;
-
     }
-
-  async findById(id: string) {
-    return await this.findOne(id);
-  }
 }

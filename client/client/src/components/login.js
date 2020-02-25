@@ -11,7 +11,9 @@ class Login extends React.Component {
                             <div className="banner_text" >
                                 <div className="banner_text_iner" >
                                     <h1 > Login </h1>
-                                    <Loginform />
+                                    <Loginform 
+                                      autenticacion={}
+                                    />
                                 </div>
                             </div>
                         </div>
