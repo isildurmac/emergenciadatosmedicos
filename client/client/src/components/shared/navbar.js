@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import LoginPage from '../signIn/signIn'
+import Login from '../autenticacion/login'
 
 class Navbar extends React.Component {
 
@@ -74,7 +74,7 @@ class Navbar extends React.Component {
                                             <a className="btn_1" href = "#" > Registrarse </a>
                                         </li>
                                         <li className="d-none d-lg-block" >
-                                            <Link className="btn_1" to = "/login" > Entrar </Link>
+                                            <NavLink className="btn_1" to = "/login"> Entrar </NavLink>
                                         </li>
                                     </ul>
                                 </div>

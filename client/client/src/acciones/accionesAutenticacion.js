@@ -1,26 +1,27 @@
 import jwt_decode from "jwt-decode";
+import axios from 'axios';
+import setAuthToken from '../components/autenticacion/setAuthentication';
 
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./tiposAcciones";
 
 
 //Registrar usuario
-export const registrarUsuario = (userData, history) => dispatch => {
-  axios.post("/api/users/register", userData)
+// export const registrarUsuario = (userData, history) => dispatch => {
+//   axios.post("/api/users/register", userData)
 
-      .then(res => history.push("/"))
-      .catch(err => 
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        })
-      );
-};
+//       .then(res => history.push("/"))
+//       .catch(err => 
+//         dispatch({
+//             type: GET_ERRORS,
+//             payload: err.response.data
+//         })
+//       );
+// };
 
 
 // Iniciar sesión - obtener token de usuario
 export const iniciarSesionUsuario = userData => dispatch => {
-    axios
-      .post("/api/users/login", userData)
+    axios.post("/login", userData)
       .then(res => {
         //Guardar token en el localStorage
         const { token } = res.data;
@@ -73,5 +74,5 @@ export const cerrarSesionUsuario = history => dispatch => {
     dispatch(cambiarUsuarioActual({}));
 
   
-    history.push("/dashboard");
+    history.push("/");
 };
