@@ -52,8 +52,7 @@ class Registry extends React.Component {
     
     console.log(this.state.data);
     this.registryService.saveUser(this.state.data).then(res => {
-      console.log(res);
-      
+      console.log(res);      
     })
   }
 
@@ -80,20 +79,20 @@ render() {
           </span>
           <br />
           <span className="p-float-label">
-            <InputText type="email" id="correo" name='email' value={this.state.data.email} onChange={this.onChange} />
+            <InputText type="email" id="correo" name='email' value={this.state.data.email} onChange={this.onChange} required={true}/>
             <label htmlFor="in">Correo</label>
           </span>
           <br />
           <span className="p-float-label">
-            <InputText id="usuario" name='userName' value={this.state.data.userName} onChange={this.onChange} />
+            <InputText id="usuario" name='userName' value={this.state.data.userName} onChange={this.onChange} required={true}/>
             <label htmlFor="in">Usuario</label>
           </span>
           <br />
-          <Dropdown value={this.state.data.gender} name='gender' options={sexoSelectItems} onChange={this.onChange} placeholder="Seleccione el sexo" />
+          <Dropdown value={this.state.data.gender} name='gender' options={sexoSelectItems} onChange={this.onChange} placeholder="Seleccione el sexo" required={true}/>
           <br />
           <br />
           <span className="p-float-label">
-            <InputText type="password" id="contrasena" name='password' value={this.state.data.password} onChange={this.onChange} />
+            <InputText type="password" id="contrasena" name='password' value={this.state.data.password} onChange={this.onChange} required={true}/>
             <label htmlFor="in">Contraseña</label>
           </span>
           <br />
