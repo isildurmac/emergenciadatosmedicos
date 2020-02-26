@@ -4,17 +4,19 @@ import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './auth/auth.service';
+//import {AuthService } from './auth/auth.service';
 import { UserService } from './services/user.service';
 import { RoleService } from './services/role.service';
 import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './auth/jwt.strategy';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtStrategy } from './controllers/auth-controller/jwt.strategy';
 import { UserRepository } from './repositories/user-repository';
 import { RoleRepository } from './repositories/role-repository';
 import { ServeHtmlMiddleware } from './serve-html.middleware';
 import { UserControllerController } from './controllers/user-controller/user-controller.controller';
 import { AuthController } from './controllers/auth-controller';
+
 
 @Module({
   imports: [
@@ -23,13 +25,22 @@ import { AuthController } from './controllers/auth-controller';
     }),
     TypeOrmModule.forRoot(),
     TypeOrmModule.forFeature([UserRepository, RoleRepository]),
-    PassportModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: 'secretKey',
+      secretOrPrivateKey: 'secretKey',
       signOptions: {
-        expiresIn: '3600s',
+        expiresIn: 3600,
       },
     }),
+    // JwtModule.registerAsync({
+    //   useFactory: async () => ({
+    //     signOptions: {
+    //        expiresIn: 3600,
+    //     },
+    //     secretOrPrivateKey: 'secretKey',
+    //   }),
+    //   inject: [JwtService], 
+    // }),
   ],
   controllers: [AppController, UserControllerController, AuthController],
   providers: [JwtStrategy, AppService, AuthService, UserService, RoleService],

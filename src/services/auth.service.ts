@@ -1,41 +1,40 @@
-import { Injectable } from '@nestjs/common';
-import { UserService } from './user.service';
-import { JwtService } from '@nestjs/jwt';
-import { sign } from 'jsonwebtoken';
+import { UserService } from "./user.service";
+import { JwtService } from "@nestjs/jwt";
+import { LoginDto } from "../dtos/login.dto";
+import { User } from "../models/user";
+import { JwtPayload } from "src/controllers/auth-controller/jwt.payload";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 
-@Injectable()
+
 export class AuthService {
-  constructor(
-    private readonly userService: UserService,
-    private readonly jwtService: JwtService,
-  ) {}
+    constructor(private readonly userService: UserService, 
+                 private readonly jwtService: JwtService, 
+               ) {}
 
-  async signPayLoad(payload: any) {
-    return sign(payload, 'secretKey', { expiresIn: '7d' });
-  };
+    // async register(userDto: UserDto):
+    // Promise<RegistrationStatus> { let status: RegistrationStatus = { success: true, message: 'user registered', };
+    //     try { await this.usersService.create(userDto); } catch (err) { status = { success: false, message: err, }; }
+    //     return status; }
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.userService.findOneByUsername(username);
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
-    }
-    return null;
-  }
-
-  async validateUserToken(signedUser: any): Promise<any> {
-    console.log('SIGNEDUSER: ', signedUser);
-    if (signedUser && signedUser.email) {
-      return this.userService.findOneByUsername(signedUser.email);
+    async login(loginDto: LoginDto): Promise<any> { // find user in db 
+        const user = await this.userService.findByLogin(loginDto);   
+        // generate and sign token 
+        const token = this._createToken(user);
+        return { email: user.email, ...token, }; 
     }
 
-    return null;
-  }
+    private _createToken({ email }: User): any { 
+        const user: JwtPayload = { email }; 
+        const accessToken = this.jwtService.sign(user); 
+        return { expiresIn: '3600', accessToken, 
+        }; 
+    }
 
-  async login(user: any) {
-    const payload = { username: user.username, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
-  }
+    async validateUser(payload: JwtPayload): Promise<User> { 
+        const user = await
+        this.userService.findByPayload(payload); 
+        if (!user) { 
+            throw new HttpException('Token inválido', HttpStatus.UNAUTHORIZED); 
+        } return user; 
+    }
 }

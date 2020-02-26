@@ -12,7 +12,7 @@ class Login extends React.Component {
                                 <div className="banner_text_iner" >
                                     <h1 > Login </h1>
                                     <Loginform 
-                                      autenticacion={}
+                                      autenticacion={false}
                                     />
                                 </div>
                             </div>

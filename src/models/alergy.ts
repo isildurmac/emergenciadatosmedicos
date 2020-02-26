@@ -1,3 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-export class Alergy {}
+export class Alergy {
+    
+}

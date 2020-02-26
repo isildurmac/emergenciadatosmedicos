@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Timestamp, BeforeInsert, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Timestamp, BeforeInsert, ManyToOne, JoinColumn } from 'typeorm';
 import { IsString, IsNumber, IsOptional, IsDate } from 'class-validator';
 import { Role } from './role';
 import { hashSync } from 'bcrypt';
@@ -15,10 +15,11 @@ export class User {
   @IsString() email: string;
   @Column({ name: 'ci', length: 11 })
   @IsString() ci: string;
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+  @CreateDateColumn({ name: 'created_At', type: 'timestamp' })
   @IsDate() createdAt: Timestamp;
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
+  @UpdateDateColumn({ name: 'updated_At', type: 'timestamp' })
   @IsDate() updatedAt: Timestamp;
+  
 
   @ManyToOne(type => Role, role => role.users )
   role: Role;
