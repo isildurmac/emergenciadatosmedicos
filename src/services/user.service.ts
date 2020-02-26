@@ -1,54 +1,43 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserDTO } from '../models/user.dto'
-import { LoginDTO } from '../models/auth.dto'
-import { UserRepository } from 'src/repositories/user-repository';
+import { LoginDto } from '../dtos/login.dto';
+import { UserRepository } from '../repositories/user-repository';
 import bcrypt from 'bcrypt';
+import { User } from '../models/user';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(UserRepository)
-    private readonly userRepository: UserRepository,
-  ) {}
+  constructor( 
+             @InjectRepository(User) 
+             private readonly userRepository: Repository<User>, ) {}
+
+  async findOne(options?: object): Promise<User> { 
+    const user = await this.userRepository.findOne(options); 
+    return user; 
+  }
+
+  async findByLogin({ email, password }: LoginDto):
+        Promise<User> { const user = await this.userRepository.findOne({ where: { email } });
+        if (!user) { 
+          throw new HttpException('El usuario no existe', HttpStatus.UNAUTHORIZED); 
+        }
+        // compare passwords 
+        const areEqual = await bcrypt.compare(user.password, password);
+        if (!areEqual) { 
+          throw new HttpException('Credenciales inválidas', HttpStatus.UNAUTHORIZED); 
+        }
+        return user 
+  }
+   
+  async findByPayload({ email }: any): Promise<User> { 
+    return await this.findOne({ where:{ email } }); }
 
   async findAll() {
     return await this.userRepository.find();
   }
-
-  async findOneByUsername(email: string) {
-    return this.userRepository.findOneOrFail({ where: { email } });
-  }
-
+  
   async findOneById(id: string) {
     return this.userRepository.findOne(id);
   }
-
-  async findOneByLogin(login: LoginDTO) {
-    const user = await this.userRepository.findOne(login.email);
-    if(!user) {
-      throw new UnauthorizedException("Credenciales inválidas");
-    }
-    
-    if(await bcrypt.compare(login.password, user.password))
-    {
-      return user;
-    }
-    else {
-      throw new UnauthorizedException("Credenciales inválidas");
-    }
-  }
-
-  /* async saveOrEditUser(user: CreateEditUser) {
-    if (user.id) {
-      if (user.password === '') {
-        const { name, email, type } = user;
-        return this.usersRepository.update(user.id, { name, email, type });
-      } else {
-        user.password = hashSync(user.password);
-        return this.usersRepository.update(user.id, user);
-      }
-    }
-    return this.usersRepository.save(user);
-  }*/ 
 }

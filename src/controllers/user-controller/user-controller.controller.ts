@@ -18,7 +18,7 @@ export class UserControllerController {
 
   @Post('api/user/login')
   async login(userDTO: any): Promise<User> {
-    return this.userService.findOneByLogin(userDTO);
+    return this.userService.findByLogin(userDTO);
   }
 
 

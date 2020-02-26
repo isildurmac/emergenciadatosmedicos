@@ -35,9 +35,9 @@ export class AppController {
     return req.user;
   }
   
-  @Post('api/auth/login')
-  async login(@Body() user: any) {
-    console.log('USER: ', user);
-    return this.authService.login(user);
-  }
+  // @Post('api/auth/login')
+  // async login(@Body() user: any) {
+  //   console.log('USER: ', user);
+  //   return this.authService.login(user);
+  // }
 }

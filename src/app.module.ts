@@ -8,12 +8,14 @@ import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { RoleService } from './services/role.service';
 import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './auth/jwt.strategy';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtStrategy } from './controllers/auth-controller/jwt.strategy';
 import { UserRepository } from './repositories/user-repository';
 import { RoleRepository } from './repositories/role-repository';
 import { ServeHtmlMiddleware } from './serve-html.middleware';
 import { UserControllerController } from './controllers/user-controller/user-controller.controller';
+import { AuthRepository } from './repositories/auth.repository';
+import { AuthController } from './controllers/auth-controller/auth-controller';
 
 @Module({
   imports: [
@@ -21,17 +23,26 @@ import { UserControllerController } from './controllers/user-controller/user-con
       rootPath: join(__dirname, '..', 'client/client/build'),
     }),
     TypeOrmModule.forRoot(),
-    TypeOrmModule.forFeature([UserRepository, RoleRepository]),
-    PassportModule,
+    TypeOrmModule.forFeature([UserRepository, RoleRepository, AuthRepository]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: 'secretKey',
+      secretOrPrivateKey: 'secretKey',
       signOptions: {
-        expiresIn: '3600s',
+        expiresIn: 3600,
       },
     }),
+    // JwtModule.registerAsync({
+    //   useFactory: async () => ({
+    //     signOptions: {
+    //        expiresIn: 3600,
+    //     },
+    //     secretOrPrivateKey: 'secretKey',
+    //   }),
+    //   inject: [JwtService], 
+    // }),
   ],
-  controllers: [AppController, UserControllerController],
-  providers: [JwtStrategy, AppService, AuthService, UserService, RoleService],
+  controllers: [AppController, UserControllerController, AuthController],
+  providers: [AppService, JwtStrategy, JwtService, AuthService, UserService, RoleService],
 })
 export class AppModule {
   /* configure(consumer: MiddlewareConsumer) {
