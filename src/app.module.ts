@@ -4,8 +4,7 @@ import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthService } from './auth/auth.service';
-//import {AuthService } from './auth/auth.service';
+import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { RoleService } from './services/role.service';
 import { PassportModule } from '@nestjs/passport';
@@ -15,8 +14,8 @@ import { UserRepository } from './repositories/user-repository';
 import { RoleRepository } from './repositories/role-repository';
 import { ServeHtmlMiddleware } from './serve-html.middleware';
 import { UserControllerController } from './controllers/user-controller/user-controller.controller';
-import { AuthController } from './controllers/auth-controller';
-
+import { AuthRepository } from './repositories/auth.repository';
+import { AuthController } from './controllers/auth-controller/auth-controller';
 
 @Module({
   imports: [
@@ -24,7 +23,7 @@ import { AuthController } from './controllers/auth-controller';
       rootPath: join(__dirname, '..', 'client/client/build'),
     }),
     TypeOrmModule.forRoot(),
-    TypeOrmModule.forFeature([UserRepository, RoleRepository]),
+    TypeOrmModule.forFeature([UserRepository, RoleRepository, AuthRepository]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secretOrPrivateKey: 'secretKey',
@@ -43,7 +42,7 @@ import { AuthController } from './controllers/auth-controller';
     // }),
   ],
   controllers: [AppController, UserControllerController, AuthController],
-  providers: [JwtStrategy, AppService, AuthService, UserService, RoleService],
+  providers: [AppService, JwtStrategy, JwtService, AuthService, UserService, RoleService],
 })
 export class AppModule {
   /* configure(consumer: MiddlewareConsumer) {
