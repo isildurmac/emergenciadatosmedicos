@@ -23,10 +23,16 @@ export class AuthController {
         return { auth: 'works' }
     }
 
-    @Post('login') 
+    @Post('/login') 
     @UsePipes(ValidationTypes)
     public async login(@Body() loginDto: LoginDto){ 
-      return await this.authService.login(loginDto); 
+        const user = await this.userService.findByLogin(loginDto);
+        const payload = {
+            email: user.email
+        }
+        const token = await this.authService.signPayload(payload);
+        
+        return { user, token };
     }
 
 

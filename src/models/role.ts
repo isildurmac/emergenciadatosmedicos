@@ -7,9 +7,9 @@ export class Role {
   id: number;
   @Column({ name: 'role', length: 55 })
   role: string;
-  @CreateDateColumn({ name: 'created_At', type: 'timestamp' })
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAt: Timestamp;
-  @UpdateDateColumn({ name: 'updated_At', type: 'timestamp' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
   updatedAt: Timestamp;
 
   @OneToMany(type => User, user => user.role,

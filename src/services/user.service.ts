@@ -37,7 +37,7 @@ export class UserService {
    
   async findByPayload(payload: any) { 
     const { email } = payload;
-    return await this.userRepository.findOne({ where:{ email } }); 
+    return await this.userRepository.findOne({ email }); 
   }
 
   async findAll() {

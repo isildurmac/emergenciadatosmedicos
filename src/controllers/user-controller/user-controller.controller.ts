@@ -10,16 +10,16 @@ export class UserControllerController {
     private readonly userService: UserService,
   ) {}
 
-  @Get('api/user/:id')
+  @Get('/:id')
   async getUserData(@Param('id') id: any): Promise<User> {
     console.log('USER ID: ', id);
     return this.userService.findOneById(id);
   }
 
-  @Post('api/user/login')
-  async login(userDTO: any): Promise<User> {
-    return this.userService.findByLogin(userDTO);
-  }
+  // @Post('/login')
+  // async login(userDTO: any): Promise<User> {
+  //   return this.userService.findByLogin(userDTO);
+  // }
 
 
 }

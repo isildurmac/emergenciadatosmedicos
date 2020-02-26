@@ -7,7 +7,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { UserRepository } from "src/repositories/user-repository";
 import { sign } from "jsonwebtoken";
 
-
+@Injectable()
 export class AuthService {
     constructor(
                  private readonly userService: UserService,
@@ -17,6 +17,10 @@ export class AuthService {
     // Promise<RegistrationStatus> { let status: RegistrationStatus = { success: true, message: 'user registered', };
     //     try { await this.usersService.create(userDto); } catch (err) { status = { success: false, message: err, }; }
     //     return status; }
+
+    async signPayload(payload: any) {
+       return sign(payload, 'secretKey', { expiresIn: '3600s'});
+    }
 
     async login(loginDto: LoginDto): Promise<void> { // find user in db 
         const user = await this.userService.findByLogin(loginDto);   

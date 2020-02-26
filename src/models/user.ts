@@ -15,12 +15,12 @@ export class User {
   @IsString() email: string;
   @Column({ name: 'ci', length: 11 })
   @IsString() ci: string;
-  @CreateDateColumn({ name: 'created_At', type: 'timestamp' })
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   @IsDate() createdAt: Timestamp;
-  @UpdateDateColumn({ name: 'updated_At', type: 'timestamp' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
   @IsDate() updatedAt: Timestamp;
-  @JoinColumn({name: 'role_id'})
-  rol: Role
+  // @JoinColumn({name: 'role_id'})
+  // rol: Role
 
   @ManyToOne(type => Role, role => role.users )
   role: Role;
