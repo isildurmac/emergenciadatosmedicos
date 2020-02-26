@@ -1,14 +1,16 @@
 import { UserService } from "./user.service";
-import { JwtService } from "@nestjs/jwt";
 import { LoginDto } from "../dtos/login.dto";
 import { User } from "../models/user";
 import { JwtPayload } from "src/controllers/auth-controller/jwt.payload";
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { UserRepository } from "src/repositories/user-repository";
+import { sign } from "jsonwebtoken";
 
 
 export class AuthService {
-    constructor(private readonly userService: UserService, 
-                 private readonly jwtService: JwtService, 
+    constructor(
+                 private readonly userService: UserService,
                ) {}
 
     // async register(userDto: UserDto):
@@ -16,7 +18,7 @@ export class AuthService {
     //     try { await this.usersService.create(userDto); } catch (err) { status = { success: false, message: err, }; }
     //     return status; }
 
-    async login(loginDto: LoginDto): Promise<any> { // find user in db 
+    async login(loginDto: LoginDto): Promise<void> { // find user in db 
         const user = await this.userService.findByLogin(loginDto);   
         // generate and sign token 
         const token = this._createToken(user);
@@ -25,9 +27,8 @@ export class AuthService {
 
     private _createToken({ email }: User): any { 
         const user: JwtPayload = { email }; 
-        const accessToken = this.jwtService.sign(user); 
-        return { expiresIn: '3600', accessToken, 
-        }; 
+        const accessToken =  sign(user, 'secretKey', { expiresIn: '3600s' }); 
+        return accessToken; 
     }
 
     async validateUser(payload: JwtPayload): Promise<User> { 

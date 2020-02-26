@@ -19,7 +19,8 @@ export class User {
   @IsDate() createdAt: Timestamp;
   @UpdateDateColumn({ name: 'updated_At', type: 'timestamp' })
   @IsDate() updatedAt: Timestamp;
-  
+  @JoinColumn({name: 'role_id'})
+  rol: Role
 
   @ManyToOne(type => Role, role => role.users )
   role: Role;

@@ -4,8 +4,8 @@ const axios = require('axios');
     async () => {
         const { data: { token } } = await axios.post('http://localhost:3000/auth/login',
         {
-           email: 'email',
-           password: 'password'
+           email: 'esh@gmail.com',
+           password: 'esh1234*'
         });
 
         try {
