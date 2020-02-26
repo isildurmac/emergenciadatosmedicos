@@ -17,7 +17,7 @@ class Loginform extends React.Component {
   componentDidMount(){
     //Si inició sesión y el usuario navega a la página de inicio de sesión, se redirige al dashboard
     if (this.props.autenticacion == true) {
-     this.props.history.push("/dashboard");
+     this.props.history.push("/login");
    }
 }
 
